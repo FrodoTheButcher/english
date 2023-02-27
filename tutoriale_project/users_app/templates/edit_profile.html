@@ -1,0 +1,12 @@
+{% extends "navbar.html" %}
+
+{% block content %}
+<form method="POST" action="" enctype="multipart/form-data" >
+    {%csrf_token%}
+{{form.email}}
+{{form.name}}
+{{form.last_name}}
+{{form.profile_image}}
+{{form.username}}
+<input type="submit" value="update">
+{% endblock %}
