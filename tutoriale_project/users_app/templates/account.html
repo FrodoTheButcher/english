@@ -81,6 +81,7 @@
    {
         transform:translate(-50%,0) rotate(100deg);
         cursor:pointer;
+        z-index: 20;
         
    }
 
@@ -194,7 +195,7 @@ top: 50px;
     display: flex;
     padding: 5px;
     border: 1px solid #c9c9c9;
-
+    z-index: 5;
     
 }
 .basic>h3{
@@ -273,9 +274,140 @@ top: 50px;
     bottom: 0;
 }
 
+.btn{
+    background-color:rgb(16, 139, 196);
+    border: 1px solid #000000;
+    width: 100%;
+    color: white;
+    
+}
+
+
+body{
+  background-color: black;
+}
+
+
+.form-control{
+ width: 100%;
+ height: 50px;
+ text-align: center;
+ left: 0;
+ right: 0;
+ top: 0;
+ bottom: 0;
+ margin: auto;
+ font-family:Arial, Helvetica, sans-serif;
+}
+
+#passwords{
+  border: 1px solid #000000;
+  background-color: white;
+  margin-bottom: 20px;
+  text-align: center;
+  
+}
+
+.black{
+    background-color: transparent;
+    box-shadow: 5px 5px 5px 5px;
+}
+#old_passsword{
+  border: 1px solid #111;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#page{
+    pointer-events: none;
+    position: absolute;
+  top: 150px;
+  box-shadow: 5px 5px 5px 5px;
+  z-index: 5;
+  height: fit-content;
+  width: fit-content;
+        width: 20%;
+        margin:  auto;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        background: #ebebeb;
+        transition: all 0.5s;
+        transform: translateY(-150px);
+        filter: blur(50%);
+        opacity: 0;
+        visibility: none;
+}
+.page_appear{
+    opacity: 1 !important;
+    visibility: 1 !important;
+    transform: translateY(0px) !important;
+    filter: blur(0) !important;
+    pointer-events: all !important;
+}
+#page>h3{
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#subm
+{
+  width: 100%;
+  background-color: transparent;
+  border: 2px solid #111;
+  color: white;
+  background-color: blue;
+}
+
+
+.mb-3{
+    background-color: #ffffff;
+    border: 1px solid #111;
+}
+
+
+#account_settings
+{
+    position: absolute;
+    z-index: 5;
+    text-align: center;
+    background-color: rgb(243, 243, 243);
+    border-radius: 2%;
+    border: 1px solid black;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 300px;
+    height: fit-content;
+    transform: translateY(-200px);
+    opacity: 0;
+    visibility: 0;
+    pointer-events: none;
+    transition: all 0.5s;
+    filter: blur(100%);
+}
+.form-label
+{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.update_appear
+{
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events:all !important; 
+    transform: translateY(0px) !important;
+    filter: blur(0) !important;
+}
 
 </style>
 
+
+  <!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  
 
 <div id="user" class="hide" >
         <div  id="userdropdown" >
@@ -357,8 +489,8 @@ top: 50px;
                         <div class="basic">
                             <h3>Student id:</h3><p>  "1234"</p>
                         </div>
-                        <div class="basic">
-                            <h3>Password</h3> <p> <a href="#">Change password</a></p>
+                        <div   class="basic">
+                            <h3>Password</h3> <p  style="cursor:pointer; color:blue "  onclick="change_password()" >Change password</p>
                     </div>
 
                 </div>
@@ -414,10 +546,11 @@ top: 50px;
                     <div class="Basic_info">
                         <div class="basic">
                             
-                          <h3>Delete account:</h3> <a href="{% url 'delete_user' profile.id %}">Delete</a>
+                          <h3>Delete account:</h3><a data-bs-toggle="modal" data-bs-target="#exampleModal" href="">Delete</a> 
+ 
                         </div>
                         <div class="basic">
-                            <h3>Update account:</h3><a href="{% url 'update_profile' request.user.id %}">Update</a>
+                            <h3>Update account:</h3><a onclick="update_account()"  href="#">Update</a>
                         </div>
                         <div class="basic">
                             <h3>Privacy:</h3><a href="">Privacy document</a>
@@ -433,9 +566,120 @@ top: 50px;
         </div>
     </div>
     
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'delete_account' profile.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="delete!">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <input  class="btn btn-primary" type="submit" value="delete!">
+              </button>
+            </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+      <div id="page" >
+
+        <h3>Change password</h3>
+      <form action="{% url 'change_password' request.user.id %}" id="form" method="POST">
+          {% csrf_token %} 
+          <div id="passwords">
+            {{form.password1}}
+            {{form.password2}}
+         </div>
+         
+      
+        
+          <input id="old_passsword" type="text" placeholder="old password" name="oldpassword" >
+          <input id=subm type="submit">
+              
+         
+      </form>
+      </div>
+
+
+     
+            <form id="account_settings" method="POST" action="{% url 'update_profile' request.user.id %}" enctype="multipart/form-data" >
+                {%csrf_token%}
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                {{formprofile.email}}
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">First name</label>
+                    {{formprofile.name}}
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Second name</label>
+                    {{formprofile.last_name}}
+                </div>
+                <div class="mb-3"  >
+                    <label for="exampleInputEmail1" class="form-label">Profile img</label>
+                    {{formprofile.profile_image}}
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">username</label>
+                    {{formprofile.username}}
+                </div>
+                
+                <input class="btn btn-primary" type="submit" value="update">
+                </form>
+    </div>
 
 
 <script>
+ var form_fields = document.getElementsByTagName('input')
+   form_fields[5].placeholder='repet password...';
+  form_fields[4].placeholder="new password...";
+
+  for (var field in form_fields){	
+  form_fields[field].className += 'form-control'
+  }
+
+
+  function update_account()
+  {
+    //update_appear
+    var x=document.getElementById("account_settings")
+    x.classList.toggle('update_appear')
+  }
+  function change_password()
+  {
+    let bttn2=document.getElementById('page')
+    bttn2.classList.toggle('page_appear')
+   
+    let x=document.getElementById("main_body")
+    let y=document.getElementById("left_side")
+    let z=document.getElementById("second_body")
+    x.classList.toggle('black')
+    y.classList.toggle('black')
+    z.classList.toggle('black')
+
+    
+  }
+
    function showsetting()
    {
         let setting = document.getElementById('img_svg');
@@ -454,7 +698,9 @@ top: 50px;
    {
     let button = document.getElementById('user');
     button.classList.toggle('showdown')
+
    }
+   
 </script>
 
 
