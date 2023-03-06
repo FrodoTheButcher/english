@@ -609,6 +609,9 @@ input{
   {% endif %}
     <section id="register-section">
         
+      <div id="cover">
+
+     
        <h1 id="title" >Register</h1>
       
         <form action="#" id="form" method="POST">
@@ -679,6 +682,7 @@ input{
         <button  id="errorbtn" onclick="show()" >Show errors</button>
         
     </section>
+  </div>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
     <div class='light x1'></div>
     <div class='light x2'></div>
@@ -691,12 +695,12 @@ input{
     <div class='light x9'></div> 
     <script>
 var form_fields = document.getElementsByTagName('input')
-form_fields[1].placeholder='Email..';
-form_fields[2].placeholder='Username..';
-form_fields[3].placeholder='Enter password...';
-form_fields[4].placeholder='Re-enter Password...';
-form_fields[5].placeholder='First name...';
-form_fields[6].placeholder='Last name...';
+form_fields[3].placeholder='Email..';
+form_fields[4].placeholder='Username..';
+form_fields[5].placeholder='Enter password...';
+form_fields[6].placeholder='Re-enter Password...';
+form_fields[7].placeholder='First name...';
+form_fields[8].placeholder='Last name...';
 
 
 for (var field in form_fields){	

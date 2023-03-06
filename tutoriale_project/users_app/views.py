@@ -115,10 +115,6 @@ def change_password(request,pk):
     
 
 
-def exercises(request):
-    ex=Exercise.objects.all()
-    context={"ex":ex}
-    return render(request,"list.html",context)
 
 def exercise(request,pk):
     ex=Exercise.objects.get(id=pk)
@@ -150,3 +146,14 @@ def exercises_solved(request,pk):
     all_exercises=Exercise.objects.filter(owner=profile)
   
     return render(request,"exercises_solved.html",{"all_exercises":all_exercises})
+
+
+def list_of_exercises(request,pk):
+    if request.method=='POST':
+        user=User.objects.get(id=pk)
+        profile=Profile.objects.get(user=user)
+        rez = request.POST['dificulty']
+        list = Exercise.objects.filter(dificulty=rez)
+        list = list.exclude(owner=profile)
+
+        return render(request,"list_type.html",{'rez':rez,'list':list})

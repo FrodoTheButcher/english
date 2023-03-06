@@ -46,6 +46,7 @@ class todo(models.Model):
         return str(self.name)
 
 class Exercise(models.Model):
+    level=models.CharField(default='Beginners',max_length=10,blank=True)
     owner = models.ManyToManyField(Profile,blank=True)
     Name=models.CharField(default="NONE",max_length=50)
     description=models.TextField(default="NONE",max_length=1000)

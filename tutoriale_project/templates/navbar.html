@@ -172,7 +172,34 @@
     {% block content %}
     {% endblock %}
 
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Choose the dificulty</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="{%url 'exercise_type' request.user.id %}" method="POST">
+                {% csrf_token %}
+                <label for="dificulty" name="dificulty">Choose  a type of dificulty</label>
+        
+                <select name="dificulty" id="cars">
+                <option value="easy" name="easy">easy</option>
+                <option value="medium" name="moderate">moderate</option>
+                <option value="hard" name="hard">hard</option>
+                </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+             <input class="btn btn-primary" type="submit" placeholder="Submit">
+            </form>
 
+        </div>
+      </div>
+    </div>
+  </div>
     
     <div id="navbar"  >
         {% if messages %}
@@ -185,13 +212,13 @@
         <div id="base">
             {% if request.user.is_authenticated %}
             <a  href="{% url 'account' request.user.id %}">Profile</a> 
+            <a href=""  data-bs-toggle="modal" data-bs-target="#exampleModal">solve some exercises...</a>
             <a href="{%url 'logout'%}">Logout</a>  
             <a href="{% url 'solved'  request.user.id %}">Exercises solved</a>         
             {% else %}
             <a href="{% url 'login' %}">Login</a>
             <a href="{%url 'register' %}">Register</a>
             {% endif %}
-            <a href="#">Home</a>
         </div>
         <div id="more">
            <p id="ICON" onclick="descriptionOPEN()" ><svg   class="iconMore" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 48 48"><g  fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="4"><path stroke-linejoin="round" d="M40 28L24 40L8 28"/><path d="M8 10h32M8 18h32"/></g></svg></p>
