@@ -22,11 +22,15 @@ function show()
    else alert("Please close the login info page")
   
 }
+
 function show_info()
 {
-  document.getElementById("bonus_info").classList.toggle("bonus_infoshow")
-  document.getElementById("register-section").classList.toggle("form_left")
+   if(!document.getElementById("errors").classList.contains("appear")){
+         document.getElementById("bonus_info").classList.toggle("bonus_infoshow")
+         document.getElementById("register-section").classList.toggle("form_left")
 
-  let setting = document.getElementById('arrow');
-        setting.classList.toggle('moverotate');
+         let setting = document.getElementById('arrow');
+               setting.classList.toggle('moverotate');
+   }
+   else alert("Inchide boule erorile!");
 }

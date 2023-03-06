@@ -55,7 +55,7 @@ body {
 .mai_mic{
   background: rgba(231, 28, 28, 0.158);
   height: 700px !important;
-  transform: translateY(-150px);
+  transform: translateY(-100px);
 }
 
 #formid
@@ -113,10 +113,6 @@ button:hover{
   opacity: .8;
   transition: .3s;
   
-}
-
-button:focus{
-  outline: black;
 }
 
 .btn
@@ -239,12 +235,12 @@ button:focus{
   bottom: 0px;
   right: 0;
   left: 0;
-  top: 63%;
+  top: 75%;
   margin: auto;
   
   transform: translateY(-100px);
   opacity: 0;
-  background-color: #ffffff17;
+  background-color: #c0090917;
   width:fit-content;
   height:fit-content;
   transition: all 1s;
@@ -262,12 +258,12 @@ button:focus{
 
 
 
-#email #username  #names
+#email,#username ,#names
 {
   position: relative;
   display:inline;
 }
-#password1 #password2
+#password1, #password2
 {
   position: relative;
   display:inline;
@@ -301,7 +297,7 @@ input{
  #EMAIL, #username, #password1 ,#password2 ,#first_name ,#second_name
  {
   position: relative;
- display: flex;
+  display: flex;
  
  }
     
